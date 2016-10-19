@@ -2,7 +2,6 @@ package com.next2.rest.api;
 
 import com.next2.rest.object.Login;
 import com.next2.rest.util.ResponseHandler;
-import com.next2.rest.util.ResourceReader;
 import org.json.JSONObject;
 
 import javax.crypto.Cipher;
@@ -11,8 +10,12 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.DatatypeConverter;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
@@ -21,7 +24,6 @@ import java.security.spec.X509EncodedKeySpec;
 
 public abstract class Authenticate {
 
-    static ResourceReader resourceReader = new ResourceReader();
     static MediaType responseType = MediaType.APPLICATION_JSON_TYPE;
     static Entity entityType = Entity.entity("", MediaType.APPLICATION_JSON_TYPE);
 
@@ -67,8 +69,8 @@ public abstract class Authenticate {
         return ResponseHandler.asJsonObject(response);
     }
 
-    private static PublicKey readPublicKeyFromDisk(String filename) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        String publicKey = resourceReader.readFromResources(filename);
+    private static PublicKey readPublicKeyFromDisk(String filename) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+        String publicKey = new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);
         publicKey = concatenatePublicKey(publicKey);
 
         byte[] binary = DatatypeConverter.parseBase64Binary(publicKey);
