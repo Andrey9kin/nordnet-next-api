@@ -6,9 +6,18 @@ import com.next2.rest.util.ResponseHandler;
 
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Properties;
 
 @Deprecated
 public class Markets extends Session {
+
+    public Markets() {
+        super();
+    }
+
+    public Markets(Properties properties) {
+        super(properties);
+    }
 
     /**
      * Get all tradable markets. Market 80 is the smart order market.

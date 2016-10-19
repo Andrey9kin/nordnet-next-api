@@ -12,6 +12,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Properties;
 
 public class Indicators extends Session {
 
@@ -20,6 +21,14 @@ public class Indicators extends Session {
 
     IndicatorList indicatorList;
     TTL indicatorListTTL = new TTL(1000);
+
+    public Indicators() {
+        super();
+    }
+
+    public Indicators(Properties properties) {
+        super(properties);
+    }
 
     public IndicatorList getIndicators() {
         LOG.info("Entering getIndicators");

@@ -9,6 +9,7 @@ import org.json.JSONArray;
 
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.Response;
+import java.util.Properties;
 
 /**
  * The main class for country operations with capabilities to perform the following actions:
@@ -26,6 +27,14 @@ public class Countries extends Session {
 
     CountryList customCountryList;
     TTL customCountryListTTL = new TTL(1000);
+
+    public Countries() {
+        super();
+    }
+
+    public Countries(Properties properties) {
+        super(properties);
+    }
 
     /**
      * Returns a list of all countries that are in the next system. Please not that trading is not available everywhere.

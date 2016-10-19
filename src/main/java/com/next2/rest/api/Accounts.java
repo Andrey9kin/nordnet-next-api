@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.Response;
+import java.util.Properties;
 
 /**
  * ACCOUNTS - Customer account operations
@@ -36,6 +37,14 @@ public class Accounts extends Session {
 
     AccountLedgers accountLedgers;
     TTL accountLedgersTTL = new TTL(1000);
+
+    public Accounts() {
+        super();
+    }
+
+    public Accounts(Properties properties) {
+        super(properties);
+    }
 
     /**
      * This method return an AccountList of all Accounts associated with a specific user. The response is returned

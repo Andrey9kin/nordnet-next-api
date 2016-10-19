@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.Response;
+import java.util.Properties;
 
 /**
  * General information about the System (the next2 backend) can be obtained by this class. This is the only
@@ -21,6 +22,13 @@ public class SystemQueries extends Session {
     SystemStatusInfo systemStatusInfo;
     TTL systemStatusInfoTTL = new TTL(1000);
 
+    public SystemQueries() {
+        super();
+    }
+
+    public SystemQueries(Properties properties) {
+        super(properties);
+    }
 
     /**
      * Returns system information for the next2 backend. The response is returned from the API as a JSONObject
